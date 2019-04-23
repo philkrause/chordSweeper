@@ -4,7 +4,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   <link rel='stylesheet' href='style.css'>
   <title >"Chord Sweeper"</title>
 </head>
@@ -15,14 +14,15 @@
 
 
 
-
-  <div class ="bkeys  ">
-      <div data-key="87" class="bkey1" ></div>
-      <div data-key="69" class="bkey1" style = >></div>
-      <div data-key="84" class="bkey2" style = ></div>
-      <div data-key="89" class="bkey2" style =  ></div>
-      <div data-key="85" class="bkey2" style = ></div>
-  </div>
+<div class = "bkeys">
+  
+      <div data-key="87" class="bkey1"></div>
+      <div data-key="69" class="bkey1"></div>
+      <div data-key="84" class="bkey2"></div>
+      <div data-key="89" class="bkey2"></div>
+      <div data-key="85" class="bkey2"></div>
+  
+</div>
   <div class="keys">
       <div data-key="65" class="key"></div>
       <div data-key="83" class="key"></div>
@@ -58,6 +58,7 @@
       
       if (e.propertyName == 'transform') {
         return e.target.classList.remove('playing');
+       
       }
     }
     function playSound(e) {
@@ -65,13 +66,17 @@
       const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
       if (!audio) return;
       key.classList.add('playing');
-      console.log('KEY', JSON.stringify(key, null ,2), 'AUDIO', JSON.stringify(audio, null , 2))
+     console.log(playSound.playing);
       audio.currentTime = 0;
       audio.play(); 
     }
-    const keys = Array.from(document.querySelectorAll('.key'));
+    const keys = [
+      ...Array.from(document.querySelectorAll('.key')),
+      ...Array.from(document.querySelectorAll('.bkeys')),
+    ]
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
     window.addEventListener('keydown', playSound);
+
   </script>
 
 
@@ -83,6 +88,5 @@
 
 </body>
 </html>
-
 
 
